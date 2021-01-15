@@ -9,6 +9,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.android.houserental.R
 import com.example.android.houserental.databinding.FragmentDetailBinding
 import com.example.android.houserental.domain.model.House
+import com.squareup.picasso.Picasso
 
 class DetailFragment : Fragment() {
 
@@ -29,6 +30,16 @@ class DetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Picasso.get()
+            .load("https://intern.docker-dev.d-tt.nl/${house.image}")
+            .fit()
+            .centerCrop()
+            .into(binding.ivHouseImage)
+        binding.tvBathroomNumber.text=house.bathrooms.toString()
+        binding.tvBedNumber.text= house.bedrooms.toString()
+        binding.tvSize.text= house.size.toString()
+        binding.tvPrice.text= house.price.toString()
         binding.tvDescription.text= house.description
     }
 }
