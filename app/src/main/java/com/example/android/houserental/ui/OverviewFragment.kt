@@ -28,14 +28,19 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick {
         super.onCreate(savedInstanceState)
 
         val houseObserver = Observer<Result> {
+            binding.progressBar.visibility= View.GONE
             when (it) {
                 is Result.Success -> {
                     adapter.houseList = it.list
                     adapter.notifyDataSetChanged()
                     if (adapter.houseList.isEmpty()) {
-                        Toast.makeText(requireContext(), "No results", Toast.LENGTH_SHORT).show()
+                        binding.ivSearStateEmpty.visibility= View.VISIBLE
+                        binding.recyclerView.visibility= View.GONE
+                    }else{
+                        binding.ivSearStateEmpty.visibility= View.GONE
+                        binding.recyclerView.visibility= View.VISIBLE
                     }
-                    Log.i("list", it.list.toString())
+
                 }
                 is Result.Failure -> Toast.makeText(
                     requireContext(),
@@ -70,13 +75,13 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
-                viewModel.getFilteredHouseListLiveData(query)
+                viewModel.setFilteredHouseListLiveData(query)
 
                 return false
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                viewModel.getFilteredHouseListLiveData(newText)
+                viewModel.setFilteredHouseListLiveData(newText)
                 return false
             }
         })

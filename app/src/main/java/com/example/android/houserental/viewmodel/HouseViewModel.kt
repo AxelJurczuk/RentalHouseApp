@@ -11,7 +11,7 @@ class HouseViewModel : ViewModel() {
 
     private val listData = MutableLiveData<Result>()
     private val houseDataSet = HouseDataSet()
-    private lateinit var listResult: List<House>
+    private var listResult:List<House> = emptyList()
 
     init {
         getHouseList()
@@ -20,10 +20,12 @@ class HouseViewModel : ViewModel() {
     private fun getHouseList() {
         houseDataSet.getHouseList(object : HouseDataSet.OnResultCallBack {
             override fun onResult(result: Result) {
-                listData.value = result
                 if (result is Result.Success) {
+                    val sortedList = result.list.sortedBy{ it.price }
+                    result.list = sortedList
                     listResult = result.list
                 }
+                listData.value = result
             }
         })
     }
@@ -32,7 +34,7 @@ class HouseViewModel : ViewModel() {
         return listData
     }
 
-    fun getFilteredHouseListLiveData(query: String?) {
+    fun setFilteredHouseListLiveData(query: String?) {
 
         val filteredList = listResult.filter { it.zip.contains(query!!) }
         val newResult = Result.Success(filteredList)

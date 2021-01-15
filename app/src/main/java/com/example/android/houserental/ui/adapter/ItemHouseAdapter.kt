@@ -1,5 +1,6 @@
 package com.example.android.houserental.ui.adapter
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,9 @@ class ItemHouseAdapter (private val context: Context, private val clickListener:
             val item = houseList[position]
             holder.price.text = item.price.toString()
             Picasso.get()
-                .load(item.image)
+                .load("https://intern.docker-dev.d-tt.nl/${item.image}")
+                .fit()
+                .centerCrop()
                 .into(holder.houseImage)
             holder.zip.text = item.zip
             holder.bedImage.setImageResource(R.drawable.ic_bed)
