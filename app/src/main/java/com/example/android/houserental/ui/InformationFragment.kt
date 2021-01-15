@@ -19,7 +19,6 @@ class InformationFragment : Fragment() {
         // Inflate the layout for this fragment
         binding= FragmentInformationBinding.inflate(layoutInflater)
 
-
         return binding.root
     }
 

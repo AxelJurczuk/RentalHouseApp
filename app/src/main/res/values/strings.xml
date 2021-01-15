@@ -2,4 +2,11 @@
     <string name="app_name">HouseRental</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="about_description">descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription
+    descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription
+    descriptiondescriptiondescriptiondescriptiondescription
+    descriptiondescriptiondescriptiondescriptiondescriptiondescription</string>
+    <string name="design_and_development">Design and Development</string>
+    <string name="home">Home</string>
+    <string name="info">Info</string>
 </resources>

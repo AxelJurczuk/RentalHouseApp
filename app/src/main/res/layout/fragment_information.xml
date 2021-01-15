@@ -1,14 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.InformationFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/tv_about_description"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="INFORMATION" />
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="16dp"
+        android:text="@string/about_description"/>
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/tv_design"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_about_description"
+        android:text="@string/design_and_development"
+        android:textAllCaps="false"
+        android:padding="16dp"/>
+    <ImageView
+        android:id="@+id/iv_dtt_banner"
+        android:layout_width="123dp"
+        android:layout_height="69dp"
+        android:padding="16dp"
+        android:src="@drawable/dtt_banner"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_design" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
