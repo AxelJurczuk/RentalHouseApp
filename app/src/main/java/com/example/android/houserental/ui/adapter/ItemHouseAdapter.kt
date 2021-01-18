@@ -26,6 +26,8 @@ class ItemHouseAdapter (private val context: Context, private val clickListener:
             val bathroomNumber: TextView = view.findViewById(R.id.tv_bathroom_number)
             val sizeImage:ImageView = view.findViewById(R.id.iv_size)
             val sizeNumber: TextView = view.findViewById(R.id.tv_size)
+            val distanceImage:ImageView = view.findViewById(R.id.iv_distance)
+            val distanceNumber: TextView = view.findViewById(R.id.tv_distance)
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -52,6 +54,9 @@ class ItemHouseAdapter (private val context: Context, private val clickListener:
             holder.bathroomNumber.text=item.bathrooms.toString()
             holder.sizeImage.setImageResource(R.drawable.ic_layers)
             holder.sizeNumber.text= item.size.toString()
+            holder.distanceImage.setImageResource(R.drawable.ic_location)
+            holder.distanceNumber.text= item.distance
+
 
             //click action
             holder.itemView.setOnClickListener {

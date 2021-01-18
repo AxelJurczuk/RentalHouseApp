@@ -44,32 +44,42 @@
                 android:id="@+id/iv_bed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"/>
+                android:padding="4dp"/>
             <TextView
                 android:id="@+id/tv_bed_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"/>
+                android:padding="4dp"/>
             <ImageView
                 android:id="@+id/iv_bathroom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"/>
+                android:padding="4dp"/>
             <TextView
                 android:id="@+id/tv_bathroom_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"/>
+                android:padding="4dp"/>
             <ImageView
                 android:id="@+id/iv_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"/>
+                android:padding="4dp"/>
             <TextView
                 android:id="@+id/tv_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"/>
+                android:padding="4dp"/>
+            <ImageView
+                android:id="@+id/iv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"/>
+            <TextView
+                android:id="@+id/tv_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="4dp"/>
         </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

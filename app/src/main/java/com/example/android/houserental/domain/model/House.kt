@@ -1,4 +1,5 @@
 package com.example.android.houserental.domain.model
+import android.location.Location
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -15,6 +16,7 @@ data class House(
     val city:String,
     val latitude: Double,
     val longitude:Double,
-    val createdDate:String
+    val createdDate:String,
+    var distance:String
 ) : Parcelable {
 }
