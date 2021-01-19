@@ -1,11 +1,11 @@
-package com.example.android.houserental.location
+package com.example.android.houserental.permissions
 
 import android.Manifest
 import android.content.Context
 import android.os.Build
 import pub.devrel.easypermissions.EasyPermissions
 
-object TrackingUtility {
+object LocationPermission {
 
     const val REQUEST_PERMISSION_CODE = 17
 

@@ -2,7 +2,9 @@ package com.example.android.houserental.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -34,6 +36,15 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         binding.bottomNavigationView.setupWithNavController(navController)
+
+        navController.addOnDestinationChangedListener{_,nd:NavDestination,_->
+            if(nd.id == R.id.overviewFragment || nd.id == R.id.informationFragment){
+                binding.bottomNavigationView.visibility = View.VISIBLE
+            }else{
+                binding.bottomNavigationView.visibility = View.GONE
+            }
+
+        }
 
     }
     override fun onSupportNavigateUp(): Boolean {

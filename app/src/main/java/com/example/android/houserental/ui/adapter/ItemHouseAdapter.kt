@@ -41,7 +41,7 @@ class ItemHouseAdapter (private val context: Context, private val clickListener:
         override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
 
             val item = houseList[position]
-            holder.price.text = item.price.toString()
+            holder.price.text = "$${item.price}"
             Picasso.get()
                 .load("https://intern.docker-dev.d-tt.nl/${item.image}")
                 .fit()

@@ -45,7 +45,8 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
         binding.tvBathroomNumber.text=house.bathrooms.toString()
         binding.tvBedNumber.text= house.bedrooms.toString()
         binding.tvSize.text= house.size.toString()
-        binding.tvPrice.text= house.price.toString()
+        binding.tvPrice.text= "$${house.price}"
+        binding.tvDistance.text=house.distance
         binding.tvDescription.text= house.description
 
     }

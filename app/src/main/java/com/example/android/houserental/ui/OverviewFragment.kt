@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,8 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.android.houserental.data.Result
 import com.example.android.houserental.databinding.FragmentOverviewBinding
 import com.example.android.houserental.ui.adapter.ItemHouseAdapter
-import com.example.android.houserental.domain.model.House
-import com.example.android.houserental.location.TrackingUtility
+import com.example.android.houserental.permissions.LocationPermission
 import com.example.android.houserental.viewmodel.HouseViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -47,9 +45,11 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick,
                     adapter.notifyDataSetChanged()
                     if (adapter.houseList.isEmpty()) {
                         binding.ivSearStateEmpty.visibility = View.VISIBLE
+                        binding.tvNoResults.visibility=View.VISIBLE
                         binding.recyclerView.visibility = View.GONE
                     } else {
                         binding.ivSearStateEmpty.visibility = View.GONE
+                        binding.tvNoResults.visibility=View.GONE
                         binding.recyclerView.visibility = View.VISIBLE
                     }
                 }
@@ -82,7 +82,7 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick,
         adapter = ItemHouseAdapter(requireContext(), this)
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
-
+        searchView.isFocusable= false
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
@@ -97,7 +97,7 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick,
         })
     }
     private fun requestPermissions() {
-        if (TrackingUtility.hasLocationPermissions(requireContext())) {
+        if (LocationPermission.hasLocationPermissions(requireContext())) {
             showDistance()
             return
         }
@@ -105,7 +105,7 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick,
             EasyPermissions.requestPermissions(
                 this,
                 "You need to accept location permissions to use this app.",
-                TrackingUtility.REQUEST_PERMISSION_CODE,
+                LocationPermission.REQUEST_PERMISSION_CODE,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
             )
@@ -113,14 +113,13 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick,
             EasyPermissions.requestPermissions(
                 this,
                 "You need to accept location permissions to use this app.",
-                TrackingUtility.REQUEST_PERMISSION_CODE,
+                LocationPermission.REQUEST_PERMISSION_CODE,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION
             )
         }
     }
-
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
         if (EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
             AppSettingsDialog.Builder(this).build().show()
@@ -128,7 +127,6 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick,
             requestPermissions()
         }
     }
-
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {}
 
     override fun onRequestPermissionsResult(
@@ -150,8 +148,6 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             ) != PackageManager.PERMISSION_GRANTED
         ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
             //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
             //                                          int[] grantResults)
@@ -171,4 +167,5 @@ class OverviewFragment : Fragment(), ItemHouseAdapter.OnItemClick,
         val action = OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(house)
         findNavController().navigate(action)
     }
+
 }

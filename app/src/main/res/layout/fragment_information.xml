@@ -13,6 +13,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:padding="16dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/gothamssm_book"
         android:text="@string/about_description"/>
 
     <TextView
@@ -22,15 +24,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_about_description"
         android:text="@string/design_and_development"
+        android:textSize="16sp"
+        android:fontFamily="@font/gothamssm_bold"
         android:textAllCaps="false"
         android:padding="16dp"/>
+
     <ImageView
         android:id="@+id/iv_dtt_banner"
-        android:layout_width="123dp"
-        android:layout_height="69dp"
+        android:layout_width="145dp"
+        android:layout_height="90dp"
         android:padding="16dp"
         android:src="@drawable/dtt_banner"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_design" />
+
+    <TextView
+        android:id="@+id/tv_by_dtt"
+        android:layout_width="51dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="36dp"
+        android:text="@string/by_dtt"
+        app:layout_constraintStart_toEndOf="@id/iv_dtt_banner"
         app:layout_constraintTop_toBottomOf="@id/tv_design" />
 
 

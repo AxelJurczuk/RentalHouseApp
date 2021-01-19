@@ -1,12 +1,14 @@
 package com.example.android.houserental.viewmodel
 
 import android.location.Location
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.android.houserental.data.HouseDataSet
 import com.example.android.houserental.data.Result
 import com.example.android.houserental.domain.model.House
+import java.math.RoundingMode
 import kotlin.math.*
 
 class HouseViewModel : ViewModel() {
@@ -24,7 +26,7 @@ class HouseViewModel : ViewModel() {
         houseDataSet.getHouseList(object : HouseDataSet.OnResultCallBack {
             override fun onResult(result: Result) {
                 if (result is Result.Success) {
-                    val sortedList = result.list.sortedBy{ it.price }
+                    val sortedList = result.list.sortedBy { it.price }
                     val destination = Location("destination")
                     for (item in sortedList.indices) {
                         destination.latitude = sortedList[item].latitude
@@ -32,11 +34,16 @@ class HouseViewModel : ViewModel() {
                         /*
                         sortedList[item].distance = "${location?.distanceTo(destination).toString()} km"
                          */
-                        val distanceNow = convertToKilometers(destination.latitude,
-                            location!!.latitude,
-                            destination.longitude,
-                            location!!.longitude)
-                        sortedList[item].distance = "${distanceNow.toString()} km"
+                        var distanceNow = 0.0
+                        if (location != null) {
+                            distanceNow = convertToKilometers(
+                                destination.latitude,
+                                location?.latitude ?: 0.0,
+                                destination.longitude,
+                                location?.longitude ?: 0.0
+                            ) }
+                        //else: in null case could potentially show a dialog to turn on gps to get distance
+                        sortedList[item].distance = "${distanceNow.toBigDecimal().setScale(1, RoundingMode.UP)} km"
                     }
                     result.list = sortedList
                     listResult = result.list
